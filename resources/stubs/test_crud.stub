@@ -1,0 +1,31 @@
+<?php
+
+namespace Tests\Feature;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use App\Models\{{model}};
+
+class {{model}}CrudTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_index()
+    {
+        $response = $this->get('/{{resource}}');
+        $response->assertStatus(200);
+    }
+
+    public function test_store()
+    {
+        $data = [
+            {{testData}}
+        ];
+
+        $response = $this->post('/{{resource}}', $data);
+        $response->assertStatus(201);
+        $this->assertDatabaseHas('{{table}}', $data);
+    }
+
+    // Add more test methods...
+}

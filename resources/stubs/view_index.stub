@@ -1,0 +1,34 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <h1>{{modelPlural}}</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    {{tableHeaders}}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(${{collection}} as ${{modelVariable}})
+                <tr>
+                    <td>{{ ${{modelVariable}}->id }}</td>
+                    {{tableBody}}
+                    <td>
+                        <a href="{{ route('{{routePrefix}}.{{modelVariable}}.show', ${{modelVariable}}) }}" class="btn btn-info">View</a>
+                        <a href="{{ route('{{routePrefix}}.{{modelVariable}}.edit', ${{modelVariable}}) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('{{routePrefix}}.{{modelVariable}}.destroy', ${{modelVariable}}) }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <a href="{{ route('{{routePrefix}}.{{modelVariable}}.create') }}" class="btn btn-success">Create New {{model}}</a>
+    </div>
+@endsection

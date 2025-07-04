@@ -1,0 +1,25 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('{{table}}', function (Blueprint $table) {
+            $table->id();
+            {{fields}}
+            $table->timestamps();
+            $table->foreignId('created_by')->constrained();
+            $table->foreignId('updated_by')->constrained();
+            $table->foreignId('deleted_by')->constrained();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('{{table}}');
+    }
+};
